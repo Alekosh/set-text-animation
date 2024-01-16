@@ -7,11 +7,131 @@ body{
   min-height: 100vh;
   background-color: azure;
   font-size: 24px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+}
+section{
+  min-height: 100vh;
 }
 span {
   color: goldenrod;
 }
+li{
+  list-style-type: none;
+}
+// ==========================
+.dark {
+  background: black;
+}
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+// ==========================
+.wavy{
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0,0,0,0.2));  // old but WOW
+}
+.wavy span{
+  position: relative;
+  display: inline-block; //???
+  text-transform: uppercase;
+  animation: animate 1s ease-in-out infinite;
+  animation-delay: calc(0.1s * var(--i));
+}
+@keyframes animate {
+  0% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-20px);
+  }
+  40%,100% {
+    transform: translateY(0px);
+  }
+}
+// ==============================
+.title span {
+  --total: calc(var(--duration) 
+  + var(--delay));
+  position: relative;
+  display: block;
+  color: transparent;
+  overflow: hidden;
+  animation: revealText 1s 
+  var(--total) forwards;
+}
+.title span::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: black;
+  animation: 
+  rollIn var(--duration)
+  var(--delay) forwards, 
+  rollOut var(--duration)
+  var(--total) forwards;
+}
+.title span:nth-child(2)::after{
+  border-top: 3px solid red;
+}
+@keyframes revealText{
+  to {
+    color: red;
+  }
+}
+@keyframes rollIn{
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes rollOut{
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(105%);
+  }
+}
+// ==========================
+.rotate{
+  display: inline-block;
+  margin-left: 10px;
+  span{
+    width: max-content;
+    position: absolute;
+    background: gray;
+    padding-inline: 10px;
+    opacity: 0;
+    transform-origin: 10% 75%;
+    animation:  rotateWords 16s
+    var(--d) linear infinite;
+    color: white;
+  }
+}
+@keyframes rotateWords{
+  5% {
+    opacity: 1;
+  }
+  10%,20% {
+    opacity: 1;
+    transform: rotate(3deg);
+  }
+  15% {
+    transform: rotate(-1deg);
+  }
+  25%{
+    opacity: 0;
+    transform: translateY(90px)
+    rotate(10deg);
+  }
+}
+// ==========================
